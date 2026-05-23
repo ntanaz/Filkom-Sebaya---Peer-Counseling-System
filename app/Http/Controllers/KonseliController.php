@@ -97,15 +97,18 @@ class KonseliController extends Controller
     /**
      * Display Counseling History.
      */
-    public function history()
+    public function history(Request $request)
     {
         $user = Auth::user();
         
-        $historyRequests = CounselingRequest::where('konseli_id', $user->user_id)
-            ->where('status', 'selesai')
-            ->with(['counselor', 'reports'])
-            ->orderBy('completed_at', 'desc')
-            ->get();
+        $query = CounselingRequest::where('konseli_id', $user->user_id)
+            ->with(['counselor', 'reports']);
+
+        if ($request->has('status') && in_array($request->status, ['menunggu', 'diproses', 'dijadwalkan', 'selesai'])) {
+            $query->where('status', $request->status);
+        }
+
+        $historyRequests = $query->orderBy('created_at', 'desc')->get();
 
         return view('konseli.history', compact('historyRequests'));
     }
