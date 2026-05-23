@@ -38,8 +38,8 @@
                     @csrf
                     
                     <div class="form-group">
-                        <label for="email" style="font-weight: 600; color: #0f2942;">NIM</label>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}" class="input-field" placeholder="Gunakan email UB / NIM UB" required autofocus style="border-radius: 4px; border: 1.5px solid #cbd5e1; padding: 12px;">
+                        <label for="email" style="font-weight: 600; color: #0f2942;">NIM atau Email</label>
+                        <input type="text" name="email" id="email" value="{{ old('email') }}" class="input-field" placeholder="Gunakan NIM UB atau Email UB" required autofocus style="border-radius: 4px; border: 1.5px solid #cbd5e1; padding: 12px;">
                         @error('email')
                             <span class="login-error-message" style="color: var(--danger); font-size: 12px; margin-top: 4px; display: block;">{{ $message }}</span>
                         @enderror

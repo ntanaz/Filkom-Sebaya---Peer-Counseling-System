@@ -23,14 +23,24 @@ class AuthController extends Controller
      */
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
         ], [
-            'email.required' => 'Email harus diisi.',
-            'email.email' => 'Format email tidak valid.',
+            'email.required' => 'NIM atau Email harus diisi.',
             'password.required' => 'Password harus diisi.',
         ]);
+
+        $loginInput = $request->input('email');
+        $password = $request->input('password');
+
+        // Check if the input is a valid email format, otherwise treat it as NIM
+        $fieldType = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'nim';
+
+        $credentials = [
+            $fieldType => $loginInput,
+            'password' => $password,
+        ];
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -39,7 +49,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password salah.',
+            'email' => 'Identitas login atau password salah.',
         ])->onlyInput('email');
     }
 
