@@ -1,0 +1,276 @@
+/* Horizontal Topbar Navbar */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 120px;
+    background-color: #ffffff;
+    border-bottom: 1.5px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.navbar-link:hover, .navbar-link.active {
+    color: #0f2942;
+}
+
+.navbar-link.active {
+    border-bottom: 2.5px solid #0f2942;
+    padding-bottom: 6px;
+}
+
+/* Jumbotron Banner Jumbotron (Full Width) */
+.jumbotron-banner {
+    background-color: #0f2942;
+    padding: 60px 120px;
+    text-align: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Main Portal Layout Container */
+.portal-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 24px;
+}
+
+/* Continue Banner Card */
+.continue-banner-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Split Dashboard Section */
+.split-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 64px;
+    margin-top: 56px;
+    align-items: start;
+}
+
+/* Premium Admin Stats Card */
+.admin-stat-card {
+    background-color: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.admin-stat-label-top {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f2942;
+    margin-bottom: 12px;
+}
+
+.admin-stat-number {
+    font-size: 52px;
+    font-weight: 800;
+    color: #0f2942;
+    line-height: 1;
+    border-bottom: 1.5px solid #f1f5f9;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.admin-stat-desc-bottom {
+    font-size: 11px;
+    color: #64748b;
+    line-height: 1.4;
+    text-align: right;
+}
+
+/* Grid layout for 4 cards */
+.admin-stats-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+/* User Management Dashboard Summary Container */
+.dashboard-summary {
+    background-color: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 32px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 40px;
+}
+
+.user-management {
+    background-color: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 32px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+}
+
+/* Header action and search bar */
+.management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.management-filters {
+    display: flex;
+    gap: 12px;
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+/* User Table */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+.user-table th, .user-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.user-table th {
+    font-weight: 700;
+    color: var(--text-muted);
+    font-size: 13px;
+    background-color: var(--bg-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.user-table td {
+    font-size: 14px;
+}
+
+.user-table tr:hover td {
+    background-color: var(--bg-main);
+}
+
+/* Simple CRUD Modals/Overlay Form styling */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 500px;
+    padding: 32px;
+    box-shadow: var(--shadow-hover);
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f2942;
+}
+
+.modal-close {
+    font-size: 24px;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .navbar-container {
+        padding: 16px 40px;
+    }
+    
+    .jumbotron-banner {
+        padding: 40px;
+    }
+    
+    .portal-container {
+        padding: 40px 24px;
+    }
+
+    .continue-banner-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 24px;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .continue-banner-card div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .continue-banner-card div:last-child {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .split-dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .admin-stats-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .management-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .management-filters {
+        max-width: 100%;
+        flex-direction: column;
+    }
+}
