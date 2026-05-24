@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('counseling_requests', function (Blueprint $table) {
             $table->id('request_id');
-            $table->unsignedBigInteger('konseli_id');
+            $table->unsignedBigInteger('konseli_id')->nullable();
             $table->unsignedBigInteger('konselor_id')->nullable();
             $table->string('topic');
             $table->text('description');
-            $table->enum('status', ['menunggu', 'diproses', 'dijadwalkan', 'selesai'])->default('menunggu');
-            $table->string('category');
-            $table->string('case_level')->nullable();
+            $table->enum('status', ['pending', 'accepted', 'rescheduled', 'cancelled', 'completed'])->default('pending');
+            $table->enum('category', ['Akademik', 'Pribadi', 'Sosial', 'Keluarga', 'Kesehatan Mental', 'Karier', 'Lainnya']);
+            $table->enum('case_level', ['Ringan', 'Sedang', 'Mendesak'])->nullable();
             $table->text('problem_description')->nullable();
             
             $table->timestamps();
@@ -27,8 +27,8 @@ return new class extends Migration
             $table->timestamp('completed_at')->nullable();
 
             // Foreign Key Constraints
-            $table->foreign('konseli_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->foreign('konselor_id')->references('user_id')->on('users')->onDelete('set null');
+            $table->foreign('konseli_id')->references('user_id')->on('users')->nullOnDelete()->onUpdate('cascade');
+            $table->foreign('konselor_id')->references('user_id')->on('users')->nullOnDelete()->onUpdate('cascade');
         });
     }
 

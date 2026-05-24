@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id('notification_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('request_id')->nullable();
             $table->text('message');
-            $table->string('type')->nullable();
+            $table->enum('type', ['status', 'schedule', 'reminder'])->nullable();
             $table->boolean('is_read')->default(false);
             $table->timestamps();
 
             // Foreign Key Constraints
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->foreign('request_id')->references('request_id')->on('counseling_requests')->onDelete('cascade');
+            $table->foreign('user_id')->references('user_id')->on('users')->nullOnDelete()->onUpdate('cascade');
+            $table->foreign('request_id')->references('request_id')->on('counseling_requests')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

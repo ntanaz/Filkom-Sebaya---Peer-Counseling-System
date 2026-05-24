@@ -17,10 +17,12 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->enum('status', ['pending', 'confirmed', 'completed', 'cancelled'])->default('pending');
+            $table->text('reschedule_reason')->nullable();
+            $table->timestamp('rescheduled_at')->nullable();
             $table->timestamps();
 
             // Foreign Key Constraints
-            $table->foreign('request_id')->references('request_id')->on('counseling_requests')->onDelete('cascade');
+            $table->foreign('request_id')->references('request_id')->on('counseling_requests')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

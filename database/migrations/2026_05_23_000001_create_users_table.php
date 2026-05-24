@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['konseli', 'counselor', 'admin']);
             $table->string('phone')->nullable();
+            $table->string('study_program')->nullable();
+            $table->string('profile_photo', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

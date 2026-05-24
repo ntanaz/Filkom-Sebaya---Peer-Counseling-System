@@ -35,7 +35,7 @@ Route::middleware(['auth', 'role:counselor'])->prefix('counselor')->name('counse
     Route::post('/permintaan/terima/{id}', [CounselorController::class, 'acceptRequest'])->name('accept');
     Route::post('/permintaan/tolak/{id}', [CounselorController::class, 'rejectRequest'])->name('reject');
     Route::get('/sesi', [CounselorController::class, 'sessions'])->name('sessions');
-    Route::post('/sesi/jadwalkan/{id}', [CounselorController::class, 'createSchedule'])->name('schedule');
+    Route::post('/sesi/jadwalkan/{id}', [\App\Http\Controllers\ScheduleController::class, 'createSchedule'])->name('schedule');
     Route::post('/sesi/selesai/{id}', [CounselorController::class, 'completeSession'])->name('complete');
     Route::get('/detail/{id}', [CounselorController::class, 'detail'])->name('detail');
 });
@@ -47,4 +47,15 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/pengguna/tambah', [AdminController::class, 'storeUser'])->name('users.store');
     Route::post('/pengguna/edit/{id}', [AdminController::class, 'updateUser'])->name('users.update');
     Route::post('/pengguna/hapus/{id}', [AdminController::class, 'deleteUser'])->name('users.destroy');
+});
+
+// Notifications & Schedule Features
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ScheduleController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/schedule/reschedule', [ScheduleController::class, 'reschedule'])->name('schedule.reschedule');
+    Route::post('/schedule/cancel', [ScheduleController::class, 'cancel'])->name('schedule.cancel');
 });

@@ -9,24 +9,39 @@
 @section('content')
     <!-- Horizontal Topbar Navbar -->
     <nav class="navbar-container">
-        <div style="display: flex; align-items: center; gap: 40px;">
-            <div class="navbar-logo" style="display: flex; align-items: center; gap: 10px;">
-                <img src="{{ asset('images/logo-icon.png') }}" alt="Logo" style="height: 32px; border-radius: 6px;">
-                <span style="font-weight: 700; color: #0f2942; font-size: 18px;">FILKOM Sebaya</span>
+        <div class="navbar-brand-group">
+            <div class="navbar-logo-wrap">
+                <img src="{{ asset('images/logo-icon.png') }}" alt="Logo" class="navbar-logo-img">
+                <span class="navbar-logo-text">FILKOM Sebaya</span>
             </div>
-            <div class="navbar-menu" style="display: flex; gap: 28px;">
+            <div class="navbar-menu">
                 <a href="{{ route('counselor.dashboard') }}" class="navbar-link active">Dashboard</a>
                 <a href="{{ route('counselor.requests') }}" class="navbar-link">Permintaan Masuk</a>
                 <a href="{{ route('counselor.sessions') }}" class="navbar-link">Manajemen Sesi</a>
             </div>
         </div>
-        <div>
-            <form action="{{ route('logout') }}" method="POST">
+        <div class="navbar-right-actions">
+            <a href="{{ route('notifications.index') }}" class="notification-bell-link" title="Notifikasi">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon-20">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"></path>
+                </svg>
+                @php
+                    $unreadNotificationsCount = \App\Models\Notification::where('user_id', Auth::id())->where('is_read', false)->count();
+                @endphp
+                @if($unreadNotificationsCount > 0)
+                    <span class="notification-bell-badge">
+                        {{ $unreadNotificationsCount }}
+                    </span>
+                @endif
+            </a>
+            <form action="{{ route('logout') }}" method="POST" class="logout-form">
                 @csrf
-                <button type="submit" class="secondary-button" style="border-radius: 6px; padding: 8px 24px; font-size: 13px; color: #0f2942; border: 1.5px solid #e2e8f0; font-weight: 600; background-color: #ffffff;">Keluar</button>
+                <button type="submit" class="navbar-logout-btn">Keluar</button>
             </form>
         </div>
     </nav>
+
+
 
     <!-- Top Banner Jumbotron (Full Width) -->
     <section class="jumbotron-banner">

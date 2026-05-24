@@ -14,14 +14,15 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id('report_id');
             $table->unsignedBigInteger('request_id');
-            $table->unsignedBigInteger('counselor_id');
+            $table->unsignedBigInteger('counselor_id')->nullable();
             $table->text('summary');
+            $table->text('counseling_result');
             $table->text('recommendation');
             $table->timestamps();
 
             // Foreign Key Constraints
-            $table->foreign('request_id')->references('request_id')->on('counseling_requests')->onDelete('cascade');
-            $table->foreign('counselor_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->foreign('request_id')->references('request_id')->on('counseling_requests')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('counselor_id')->references('user_id')->on('users')->nullOnDelete()->onUpdate('cascade');
         });
     }
 

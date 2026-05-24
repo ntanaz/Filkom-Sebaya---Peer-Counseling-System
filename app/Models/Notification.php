@@ -40,4 +40,26 @@ class Notification extends Model
     {
         return $this->belongsTo(CounselingRequest::class, 'request_id', 'request_id');
     }
+
+    // Mutator for Type to store database-aligned ENUM values
+    public function setTypeAttribute($value)
+    {
+        switch ($value) {
+            case 'success':
+            case 'request':
+            case 'status':
+                $this->attributes['type'] = 'status';
+                break;
+            case 'info':
+            case 'schedule':
+                $this->attributes['type'] = 'schedule';
+                break;
+            case 'reminder':
+                $this->attributes['type'] = 'reminder';
+                break;
+            default:
+                $this->attributes['type'] = $value;
+                break;
+        }
+    }
 }
